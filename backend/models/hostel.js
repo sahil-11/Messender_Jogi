@@ -27,6 +27,13 @@ const hostelSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    meals: [
+      {
+        type: ObjectId,
+        ref: "DailyMeal",
+        required: true,
+      },
+    ],
   },
   { timestamps: true }
 );

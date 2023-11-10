@@ -38,10 +38,12 @@ const userSchema = new mongoose.Schema(
       required: [true, "password is required"],
       minlength: [6, "password must have at least (6) caracters"],
     },
-    complaint: {
-      type: ObjectId,
-      ref: "Complaint",
-    },
+    complaint: [
+      {
+        type: ObjectId,
+        ref: "Complaint",
+      },
+    ],
     HostelID: {
       type: ObjectId,
       ref: "Hostel",

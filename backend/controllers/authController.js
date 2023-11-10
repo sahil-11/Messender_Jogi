@@ -3,13 +3,11 @@ const ErrorResponse = require("../utils/errorResponse");
 const Hostelallotment = require("../models/hostelallotment");
 const Hostel = require("../models/hostel");
 exports.signup = async (req, res, next) => {
-  // console.log(req.body);
   const { email } = req.body;
   const userExist = await User.findOne({ email });
   if (userExist) {
     return next(new ErrorResponse("E-mail already registred", 400));
   }
-
   try {
     const registrationNumber = req.body.RegistrationNumber;
     const allotmentDetails = await Hostelallotment.findOne({

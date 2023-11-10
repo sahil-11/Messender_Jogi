@@ -30,6 +30,13 @@ const complaintSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    comments: [
+      {
+        type: ObjectId,
+        ref: "Comment",
+        required: true,
+      },
+    ],
     hostel: {
       type: ObjectId,
       ref: "Hostel",
