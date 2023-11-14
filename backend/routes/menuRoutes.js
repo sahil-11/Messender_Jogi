@@ -7,8 +7,8 @@ const {
 } = require("../controllers/menuController");
 const { isAuthenticated } = require("../middleware/chiefauth");
 
-router.post("/chief/addmenu", isAuthenticated, addMenu);
-router.get("/chief/showmenu", showMenu);
-router.patch("/chief/updatemenu", isAuthenticated, updateMenu);
+router.post("/addmenu", isAuthenticated, addMenu);
+router.get("/showmenu", showMenu);
+router.patch("/updatemenu", isAuthenticated, updateMenu);
 
 module.exports = router;

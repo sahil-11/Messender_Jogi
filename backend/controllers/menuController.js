@@ -37,9 +37,10 @@ exports.showMenu = async (req, res, next) => {
     const hostel = await Hostel.findOne({ Name: hostelName })
       .populate("meals")
       .exec();
+    if (!hostel.meals) {
+      hostel.meals = new Array(7);
+    }
     const meal = hostel.meals[queryDay];
-    // console.log("...................");
-    // console.log(meal);
     try {
       // const meal = DailyMeal.findById(mealID);
       res.status(201).json({

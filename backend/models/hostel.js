@@ -20,13 +20,12 @@ const hostelSchema = new mongoose.Schema(
         required: true,
       },
     ],
-    accountant: [
-      {
-        type: ObjectId,
-        ref: "Accountant",
-        required: true,
-      },
-    ],
+    accountant: {
+      type: ObjectId,
+      ref: "Accountant",
+      required: true,
+    },
+
     meals: [
       {
         type: ObjectId,

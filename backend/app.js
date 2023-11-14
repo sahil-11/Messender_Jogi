@@ -25,6 +25,7 @@ const accountantRoutes = require("./routes/accountantRoutes");
 const chiefauthRoutes = require("./routes/chiefauthRoutes");
 const hostelallotmentRoutes = require("./routes/hostelallotmentRoutes");
 const menuRoutes = require("./routes/menuRoutes");
+const complaintRoutes = require("./routes/complaintRoutes");
 ////////middleware declarations
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "5mb" })); // parse form data
@@ -42,12 +43,19 @@ app.use("/api", accountantRoutes);
 app.use("/api", chiefauthRoutes);
 app.use("/api", hostelallotmentRoutes);
 app.use("/api", menuRoutes);
+app.use("/api", complaintRoutes);
 
 // error middleware
 app.use(errorHandler);
 
 // PORT
 const port = process.env.PORT || 9000;
+
+app.get("/", (req, res, next) => {
+  res.status(201).send({
+    message: "Success",
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
