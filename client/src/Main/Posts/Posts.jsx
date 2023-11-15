@@ -33,6 +33,7 @@ export default function Posts({post})
         </div>
         <div className="content">
         <p id="issue">{post.issue}</p>
+        <img className="proimages" src={post.image} />
         <div className="info">
          <div className="item">
             <>{liked ? <FavoriteIcon />: <FavoriteBorderIcon />}</>

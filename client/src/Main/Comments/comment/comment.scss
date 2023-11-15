@@ -2,6 +2,8 @@
 {
     margin: 30px 0px;
    justify-content: space-between;
+   max-width: fit-content;
+
     .info
     {
         gap: 3px;
@@ -10,6 +12,8 @@
         p
         {
             font-size:16px;
+            cursor:default;
+            max-width: 500px;
         }
     }
     .name

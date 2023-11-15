@@ -11,17 +11,19 @@
     .writecomment
     {
         margin-top: 20px;
-        gap:20px;
+        display: flex;
         input 
         {
-            width: fit-content;
+            width:40%;
         }
     button
         {
-            cursor: pointer;
-                border: none;
-                background-color: white;
+                cursor: pointer;
+                color: white;
+                background-color: rgb(36, 36, 248);
                 margin-left: 20px;
+                padding: 0px 10px;
+
         }
     }
 }
