@@ -8,6 +8,7 @@ export default function Stories()
     const stories =[
         {
             id:1,
+            image:"https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
            issue:"Bad food",
            upvotes:"1",
            downvotes:"4",
@@ -19,7 +20,9 @@ export default function Stories()
            hostel:"Tandon"
         },
         {
+
             id:2,
+            image:"https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
            issue:"Bad food",
            upvotes:"1",
            downvotes:"4",
@@ -31,9 +34,14 @@ export default function Stories()
            hostel:"Tandon"
         },
     ];
-    return (<div className="Stories">
+    return (
+        <div className="outer">
+        <div className="useless"></div>
+    <div className="Stories">
       {stories.map(story => (
        <Posts post={story} key={story.id} />
       ))}
+    </div>
+    <div className="useless"></div>
     </div>)
 }
