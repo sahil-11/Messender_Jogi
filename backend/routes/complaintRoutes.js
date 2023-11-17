@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { raiseComplaint } = require("../controllers/complaintController");
+const {
+  raiseComplaint,
+  showComplaints,
+  showUserComplaints,
+} = require("../controllers/complaintController");
 const { isAuthenticated } = require("../middleware/auth");
 
 const multer = require("multer");
@@ -21,5 +25,11 @@ router.post("/upload", upload.single("file"), (req, res) => {
   console.log(file, file.filename);
   res.status(201).json(file.filename);
 });
+
+router.get("/showComplaints", showComplaints); //(returns list of complaints based on the following queries:
+//   hostelName, status(resolved/unresolved), pageIndex, pageSize)
+
+router.get("/showUserComplaints", showUserComplaints); //(returns list of complaints based on the following queries:
+//   userId(student), status(resolved/unresolved), pageIndex, pageSize)
 
 module.exports = router;

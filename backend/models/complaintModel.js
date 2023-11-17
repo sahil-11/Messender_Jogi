@@ -14,9 +14,6 @@ const complaintSchema = new mongoose.Schema(
       type: Map,
       of: Boolean,
     },
-    raisedOn: {
-      type: Date,
-    },
     status: {
       type: Boolean,
       default: 0,
@@ -41,12 +38,11 @@ const complaintSchema = new mongoose.Schema(
     hostel: {
       type: ObjectId,
       ref: "Hostel",
+      required: true,
     },
-
-    // relations to be related : hostel, complaints
-    role: {
-      type: Number,
-      default: 0,
+    hostelName: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
