@@ -1,0 +1,113 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+   
+}
+li,a
+{
+    font-weight: 500;
+    font-size :16px;
+    color: black;
+    text-decoration: none;
+}
+header
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding:  30px 10%;
+    background-color: #444;
+}
+body
+{
+    background-color: lightgray;
+    
+}
+.logo 
+{
+ cursor: pointer;
+ height: 40px;
+ margin-right: auto;
+ padding: none;
+ border-radius: 25px;
+}
+.nav_links
+{
+    list-style-type: none;
+}
+.nav_links li
+{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.nav_links li a
+{
+  transition: all 0.3s ease 0s;   
+}
+.nav_links li a:hover 
+{
+    color: #0088a9;
+}
+.main
+{
+    display: flex;
+    justify-content:space-evenly;
+}
+.former
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    margin-top: 100px;
+}
+#customBtn {
+    display: inline-block;
+    background: white;
+    color: #444;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+    height: fit-content;
+  }
+  #customBtn:hover {
+    cursor: pointer;
+  }
+  span.label {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: normal;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+  }
+  span.icon {
+    background:  transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    
+  }
+  span.buttonText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 42px;
+    padding-right: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    /* Use the Roboto font that is loaded in the <head> */
+    font-family: 'Roboto', sans-serif;
+  }
+  #gSignInWrapper
+  {
+    display: flex;
+    justify-content: center;
+  }
+  .googlelogo
+  {
+     height: 25px;
+     margin-right: 10px;
+     padding: none; 
+  }
