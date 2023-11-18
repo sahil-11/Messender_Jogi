@@ -39,10 +39,6 @@ const accountantSchema = new mongoose.Schema(
       maxLength: [10, "no should have maximum 10 digits"],
       match: [/\d{10}/, "no should only have digits"],
     },
-    HostelID: {
-      type: ObjectId,
-      ref: "Hostel",
-    },
     Hostel: {
       type: String,
     },

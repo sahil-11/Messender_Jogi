@@ -23,7 +23,7 @@ const hostelSchema = new mongoose.Schema(
     accountant: {
       type: ObjectId,
       ref: "Accountant",
-      required: true,
+      // required: true,
     },
 
     meals: [

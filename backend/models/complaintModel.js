@@ -18,9 +18,8 @@ const complaintSchema = new mongoose.Schema(
       type: Boolean,
       default: 0,
     },
-    user: {
-      type: ObjectId,
-      ref: "User",
+    userId: {
+      type: String,
       required: true,
     },
     userName: {
@@ -35,11 +34,6 @@ const complaintSchema = new mongoose.Schema(
         // required: true,
       },
     ],
-    hostel: {
-      type: ObjectId,
-      ref: "Hostel",
-      required: true,
-    },
     hostelName: {
       type: String,
       required: true,

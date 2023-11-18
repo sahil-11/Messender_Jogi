@@ -18,9 +18,9 @@ const dailyMealSchema = new mongoose.Schema(
     day: {
       type: Number, // 0 -> 6 (Monday -> Sunday)
     },
-    HostelID: {
-      type: ObjectId,
-      ref: "Hostel",
+    hostelName: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

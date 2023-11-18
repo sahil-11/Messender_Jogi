@@ -13,7 +13,16 @@ exports.addMenu = async (req, res, next) => {
         success: false,
         message: "No hostel with the given name",
       });
-    const meal = await DailyMeal.create(req.body);
+
+    await DailyMeal.findOneAndDelete({
+      day: day,
+      hostelName: hostelName,
+    }).exec();
+
+    const meal = await DailyMeal.create({
+      ...req.body,
+      hostelName: hostelName,
+    });
     if (!hostel.meals) {
       hostel.meals = new Array(7);
     }
@@ -40,9 +49,9 @@ exports.showMenu = async (req, res, next) => {
     if (!hostel.meals) {
       hostel.meals = new Array(7);
     }
+
     const meal = hostel.meals[queryDay];
     try {
-      // const meal = DailyMeal.findById(mealID);
       res.status(201).json({
         success: true,
         meal: meal,
@@ -65,18 +74,23 @@ exports.updateMenu = async (req, res, next) => {
     const hostel = await Hostel.findOne({ Name: hostelName })
       .populate("meals")
       .exec();
-    // console.log(hostel);
-    const newMeal = hostel.meals[day];
-    newMeal.breakfast = req.body.breakfast;
-    newMeal.lunch = req.body.lunch;
-    newMeal.eveningSnacks = req.body.eveningSnacks;
-    newMeal.dinner = req.body.dinner;
-    newMeal.HostelID = hostel._id;
-    newMeal.day = req.body.day;
-    await newMeal.save();
+
+    await DailyMeal.findOneAndDelete({
+      day: day,
+      hostelName: hostelName,
+    }).exec();
+
+    console.log("...........");
+    const meal = await DailyMeal.create({
+      ...req.body,
+      hostelName: hostelName,
+    });
+
+    hostel.meals[day] = meal;
+    await hostel.save();
     res.status(201).json({
       success: true,
-      meal: newMeal,
+      meal: meal,
       Hostel: hostelName,
       day: day,
     });

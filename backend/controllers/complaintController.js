@@ -7,21 +7,22 @@ exports.raiseComplaint = async (req, res, next) => {
   const Issue = req.body.issue;
   const UserId = req.body.userId;
   const UserName = req.body.userName;
-  const HostelID = req.body.hostelID;
   const HostelName = req.body.hostelName;
   // console.log(req.query);
   try {
     const complaint = await Complaint.create({
       issue: Issue,
-      user: UserId,
+      userId: UserId,
       userName: UserName,
-      hostel: HostelID,
       hostelName: HostelName,
     });
 
-    await Hostel.findByIdAndUpdate(HostelID, {
-      $push: { complaints: complaint._id },
-    });
+    await Hostel.findOneAndUpdate(
+      { Name: HostelName },
+      {
+        $push: { complaints: complaint._id },
+      }
+    );
 
     await User.findByIdAndUpdate(UserId, {
       $push: { complaint: complaint._id },
