@@ -13,7 +13,8 @@ export default function Login()
   const [Password,setPassword]=useState('');
   const [Email,setEmail]=useState('');
   const [reg,setReg]=useState('');
-   async function   handlesSubmit(event)
+  const [err,setErr]=useState(false);
+   async function handlesSubmit(event)
   {
     event.preventDefault();
     function isvalidEmail(Email)
@@ -28,23 +29,23 @@ export default function Login()
   }
   if(!isvalidEmail(Email))
         {
- 
           toast('Wrong Email address');
         }
         else
         {
-        toast(toString({fName,lName,reg,Email,Password}));
-        }
         try
         {
-                await axios.post("http://localhost:3000",{
-                  fName,lName,Email,Password,reg
+                await axios.post("http://localhost:9000/api/signup",{
+                  reg,fName,lName,Email,Password,
                 });
+                console.log(fName);
         }
-        catch
+        catch (err)
         {
-              console.log(Email);
+            setErr(true);
+            console.log(err.response.data);
         }
+      }
 
    }
   
@@ -56,7 +57,7 @@ export default function Login()
       <div className="former">
     <h3>Register at MESSender Jogi</h3>
     <br />
-          <form  method="post" action="/signup">
+          <form>
   <div className="form-group">
     <input  type="text" 
     className="form-control" 
@@ -118,7 +119,7 @@ export default function Login()
     onChange={(e)=>setReg(e.target.value)}
      />
      </div>
-    <button  type="submit" className="btn btn-primary">Submit</button>
+    <button className="btn btn-primary" onClick={handlesSubmit}>Submit</button>
   </form>
   </div>
       </div>
