@@ -45,7 +45,7 @@ console.log(Email);
   <div className="former">
   <h3>Management</h3>
   <br></br>
-  <form onSubmit={handlesSubmit}>
+  <form onSubmit={handlesSubmit} action="/chief/signin">
   <div className="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input value={Email} onChange={(e)=>setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
