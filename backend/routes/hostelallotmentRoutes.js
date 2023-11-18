@@ -7,3 +7,4 @@ const { isAuthenticated } = require("../middleware/chiefauth");
 router.post("/hostelallotment", isAuthenticated, hostelallotment);
 
 module.exports = router;
+

@@ -1,0 +1,35 @@
+.comment
+{
+    margin: 30px 0px;
+   justify-content: space-between;
+   max-width: fit-content;
+
+    .info
+    {
+        gap: 3px;
+        align-items: flex-start;
+        margin-left:20px;
+        p
+        {
+            font-size:16px;
+            cursor:default;
+            width: auto;
+        }
+    }
+    .name
+        {
+            font-weight: 500;
+        }
+        .date
+        {
+            font-size: 11px;
+            color: gray;
+         align-items: end;
+         margin-right: 20px;
+         text-align: end;
+         padding-top: 0px;
+         margin-top :0px;
+         margin-bottom: 10px;
+        }
+
+}

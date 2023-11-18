@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 var cors = require("cors");
 const cookieParser = require("cookie-parser");
-
 const errorHandler = require("./middleware/error");
 
 // database connection
@@ -47,7 +46,6 @@ app.use("/api", complaintRoutes);
 
 // error middleware
 app.use(errorHandler);
-
 // PORT
 const port = process.env.PORT || 9000;
 
