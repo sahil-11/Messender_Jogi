@@ -65,6 +65,9 @@ exports.updateMenu = async (req, res, next) => {
       .populate("meals")
       .exec();
     // console.log(hostel);
+    if (!hostel.meals) {
+      hostel.meals = new Array(7);
+    }
     const newMeal = hostel.meals[day];
     newMeal.breakfast = req.body.breakfast;
     newMeal.lunch = req.body.lunch;

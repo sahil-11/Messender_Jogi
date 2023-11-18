@@ -3,30 +3,59 @@ import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import { useState } from "react";
 import styled from 'styled-components'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 const Wrapper = styled.div`
-    width: 100%;
     display: flex;
+    
+    position: absolute;
     transition: all 1.5s ease;
-    transform: translateX(${props=>props.slideIndex * -100}vw);
+    
+    transform: translateX(${props=>props.slideIndex * -80}vw);
 `
 const Slide = styled.div`
     display: flex;
     aligh-items: center;
-    width: 100vw;
+    flex-basis: 80vw;
+    flex-grow: 0;
+    flex-shrink: 0;
     height: 100vh;
 `
 const InfoContainer = styled.div`
-    flex: 1;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
     padding: 50px;
+    padding-top: 20px;
 `
 
 const Title = styled.h1`
-    font-size: 70px;
+    font-size: 50px;
     color: white;
 `
+const MenuContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+`
+const MealContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
-const MessMenu = () => {
+const MealTitle  =styled.h1`
+  margin-top: 10px;
+  color: white;
+`
+
+const MealDesc = styled.p`
+  color: white;
+`
+
+
+const MessMenu = ({messMenuOpen, setMessMenuOpen}) => {
   const [slideIndex, setSlideIndex] = useState(0);
     const handleClick = (direction)=>{
         console.log(slideIndex);
@@ -49,13 +78,16 @@ const MessMenu = () => {
         day: "Tuesday"
       },
       {
-        id: 2,
+        id: 3,
         day: "Wednesday"
       }
     ]
 
   return (
-    <div className="messmenu">
+    <div className={'messmenu ' + (messMenuOpen && 'active')}>
+      <div className="close">
+        <CloseOutlinedIcon onClick={()=>setMessMenuOpen(false)}/>
+      </div>
       <div className="card">
         
         
@@ -68,7 +100,20 @@ const MessMenu = () => {
                     
                     <InfoContainer>
                         <Title>{item.day}</Title>
-                        
+                        <MenuContainer>
+                            <MealContainer>
+                                <MealTitle>Breakfast</MealTitle>
+                                <MealDesc>Pulao</MealDesc>
+                            </MealContainer>
+                            <MealContainer>
+                                <MealTitle>Lunch</MealTitle>
+                                <MealDesc>Chaap</MealDesc>
+                            </MealContainer>
+                            <MealContainer>
+                                <MealTitle>Dinner</MealTitle>
+                                <MealDesc>Rajma</MealDesc>
+                            </MealContainer>
+                        </MenuContainer>
                     </InfoContainer>
                 </Slide>
                 ))}

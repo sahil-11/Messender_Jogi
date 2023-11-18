@@ -40,19 +40,14 @@
                 &::-webkit-scrollbar{
                     display: none;
                 }
-                position: relative;
+                    position: relative;
                     left: 25px;
-                margin-top: 0px;
-                height: 0px;
-                transition: all 1s ease;
+                    margin-top: 15px;
+                
+                    transition: all 1s ease;
             }
             &:hover{
                 font-weight: 750;
-                ul{
-                    
-                    margin-top: 25px;
-                    height: max-content;
-                }
             }
             
         }
