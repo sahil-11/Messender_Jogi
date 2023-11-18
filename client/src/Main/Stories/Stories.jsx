@@ -1,47 +1,32 @@
 import React from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Posts from "../Posts/Posts";
+import Navbar from '../../pages/Navbar1'
 import styles from './Stories.scss'
-
+import {useQuery} from '@tanstack/react-query'
+import { makeRequest } from "../../axios";
 export default function Stories()
 {
-    const stories =[
-        {
-            id:1,
-            image:"https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-           issue:"Bad food",
-           upvotes:"1",
-           downvotes:"4",
-           raisedon:"18/01/2093",
-           status:false,
-           user:"archit bajpai",
-           userName:"20214229",
-           comments:"None",
-           hostel:"Tandon"
-        },
-        {
-
-            id:2,
-            image:"https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-           issue:"Bad food",
-           upvotes:"1",
-           downvotes:"4",
-           raisedon:"18/01/2093",
-           status:false,
-           user:"archit bajpai",
-           userName:"20214229",
-           comments:"None",
-           hostel:"Tandon"
-        },
-    ];
+    const { isLoading, error, data } = useQuery(["posts"], () =>
+    makeRequest.get("/api/showComplaints").then((res) => {
+      return res.data;
+    })
+  );
     return (
+        <>        <Navbar />
         <div className="outer">
         <div className="useless"></div>
     <div className="Stories">
-      {stories.map(story => (
+
+      {
+        error ? "Something Went Wrong!" :isLoading ?"Loading" :
+        data.map(story => (
        <Posts post={story} key={story.id} />
-      ))}
+      ))
+      }
     </div>
     <div className="useless"></div>
-    </div>)
+    </div>
+    </>
+)
 }
