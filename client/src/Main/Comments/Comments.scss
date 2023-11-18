@@ -1,0 +1,29 @@
+.Comments
+{
+    img
+    {
+       width: 40px;
+       height: 40px;
+       border-radius: 50px;
+       object-fit: cover;
+       margin :0px 20px; 
+    }
+    .writecomment
+    {
+        margin-top: 20px;
+        display: flex;
+        input 
+        {
+            width:40%;
+        }
+    button
+        {
+                cursor: pointer;
+                color: white;
+                background-color: rgb(36, 36, 248);
+                margin-left: 20px;
+                padding: 0px 10px;
+
+        }
+    }
+}

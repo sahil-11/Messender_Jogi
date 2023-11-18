@@ -1,10 +1,11 @@
 import React from "react";
 import { ReactDOM } from "react";
-import styles from './styles/Landingpage.css'
+import styles from '../styles/Landingpage.css'
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer,toast} from 'react-toastify'
 import { useState } from "react";
 import axios from "axios";
+import LandingPage from "./Navbar1";
 export default function Login()
 {
   const [fName,setfName]=useState('');
@@ -36,24 +37,26 @@ export default function Login()
         }
         try
         {
-                await axios.post("http://localhost:8000",{
+                await axios.post("http://localhost:3000",{
                   fName,lName,Email,Password,reg
                 });
         }
         catch
         {
-              console.log(e);
+              console.log(Email);
         }
 
    }
   
     return (
+      <>
+      <LandingPage />      
       <div className="body">
       <div className="main">
       <div className="former">
     <h3>Register at MESSender Jogi</h3>
     <br />
-          <form onSubmit={handlesSubmit} method="post">
+          <form  method="post" action="/signup">
   <div className="form-group">
     <input  type="text" 
     className="form-control" 
@@ -124,5 +127,6 @@ export default function Login()
     hideProgressBar={true}
 />
   </div>
+  </>
     );
 }

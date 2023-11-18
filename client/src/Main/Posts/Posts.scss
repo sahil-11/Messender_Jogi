@@ -1,0 +1,82 @@
+@import "../../../style.scss";
+
+.Posts
+{
+  display: flex;
+  flex-direction: column;
+  margin: 0px 0px;
+   .contained
+   {
+      padding: 20px;
+   .User
+   {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 3px 5px lightblue ;
+    .userInfo
+    {
+        display: flex;
+        gap :20px;
+        justify-content: center;
+        
+        img 
+        {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+        .details
+        {
+            display: flex;
+            flex-direction: column;
+            .name
+            {
+                font-weight: 500;
+            }
+            .Date
+            {
+                font-size: 13px;
+            }
+        }
+    }
+}
+.content
+{
+    margin: 20px 0px;
+    width: 100%;
+    max-height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 3px 5px lightblue ;
+    #issue
+    {
+       margin-left: 25px;        
+    }
+    .proimages 
+    {
+       width: 80%;
+        height: auto;
+        margin-left: 22px;
+        margin-bottom: 12px;
+        margin-right: 22px;
+    }
+}
+.info
+{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    
+    .item
+    {
+          display: flex;
+          gap: 5px;
+          font-size:14px;
+          margin-left: 20px;
+    }
+}
+}
+}
