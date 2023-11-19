@@ -8,44 +8,44 @@ import axios from "axios";
 import LandingPage from "./Navbar1";
 export default function Login()
 {
-  const [fName,setfName]=useState('');
-  const [lName,setlName]=useState('');
-  const [Password,setPassword]=useState('');
-  const [Email,setEmail]=useState('');
-  const [reg,setReg]=useState('');
-   async function   handlesSubmit(event)
+  const [firstName,setfName]=useState('');
+  const [lastName,setlName]=useState('');
+  const [password,setPassword]=useState('');
+  const [email,setEmail]=useState('');
+  const [RegistrationNumber,setReg]=useState('');
+  const [err,setErr]=useState(false);
+   async function handlesSubmit(event)
   {
     event.preventDefault();
     function isvalidEmail(Email)
     {  
       
-      var x=fName;
-      var y=reg;
+      var x=firstName;
+      var y=RegistrationNumber;
       var z=x+'.'+y+'@mnnit.ac.in';
-      if(z==Email)
+      if(z==email)
       return 1;
     return 0;
   }
-  if(!isvalidEmail(Email))
+  if(!isvalidEmail(email))
         {
- 
           toast('Wrong Email address');
         }
         else
         {
-        toast(toString({fName,lName,reg,Email,Password}));
-        }
         try
         {
-                await axios.post("http://localhost:3000",{
-                  fName,lName,Email,Password,reg
+                await axios.post("http://localhost:9000/api/signup",{
+                  RegistrationNumber,firstName,lastName,email,password,
                 });
+                
         }
-        catch
+        catch (err)
         {
-              console.log(Email);
+            setErr(true);
+            console.log(err.response.data);
         }
-
+      }
    }
   
     return (
@@ -56,7 +56,7 @@ export default function Login()
       <div className="former">
     <h3>Register at MESSender Jogi</h3>
     <br />
-          <form  method="post" action="/signup">
+          <form>
   <div className="form-group">
     <input  type="text" 
     className="form-control" 
@@ -64,7 +64,7 @@ export default function Login()
     aria-describedby="emailHelp" 
     placeholder="First Name" 
     required="on"
-    value={fName}
+    value={firstName}
     onChange={(e)=>setfName(e.target.value)}
     />
   </div>
@@ -75,7 +75,7 @@ export default function Login()
     aria-describedby="emailHelp" 
     placeholder="Last Name" 
     required="on"
-    value={lName}
+    value={lastName}
     onChange={(e)=>setlName(e.target.value)}
     />
   </div>
@@ -88,7 +88,7 @@ export default function Login()
     autoComplete="off"
     autoSave="off"
     required="on"
-    value={Password}
+    value={password}
     onChange={(e)=>setPassword(e.target.value)}
      />
   </div>
@@ -101,7 +101,7 @@ export default function Login()
     autoComplete="off"
     autoSave="off"
     required="on"
-    value={Email}
+    value={email}
     onChange={(e)=>setEmail(e.target.value)}
      />
      </div>
@@ -114,11 +114,11 @@ export default function Login()
     autoComplete="off"
     autoSave="off"
     required="on"
-    value={reg}
+    value={RegistrationNumber}
     onChange={(e)=>setReg(e.target.value)}
      />
      </div>
-    <button  type="submit" className="btn btn-primary">Submit</button>
+    <button className="btn btn-primary" onClick={handlesSubmit}>Submit</button>
   </form>
   </div>
       </div>
