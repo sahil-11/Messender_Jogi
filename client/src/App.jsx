@@ -5,26 +5,33 @@ import MessMenu from "./components/messMenu/MessMenu";
 import { useState } from "react";
 import UpdateMenu from "./pages/update_menu/UpdateMenu";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate
+  createBrowserRouter,
+  RouterProvider,
 } from "react-router-dom";
 
 
 function App() {
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [messMenuOpen, setMessMenuOpen] = useState(false);
-  return
-        (
-          <Router>
-            <Routes>
-              <Route exact path="/warden" element={<Warden setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>}/>
-              <Route path="/menu/update" element={<UpdateMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>}/>
-            </Routes>
-          </Router>
-        )
+
+  const router = createBrowserRouter([
+    {
+      path: "/warden",
+      element: <Warden setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>,
+    },
+    {
+      path: "/update",
+      element: <UpdateMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>,
+    },
+  ]);
+
+  
+  return (
+          <div className="App">
+            <RouterProvider router={router} />
+          </div>
+        );
 }
 
 export default App;
