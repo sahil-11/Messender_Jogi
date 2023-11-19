@@ -25,6 +25,7 @@ const chiefauthRoutes = require("./routes/chiefauthRoutes");
 const hostelallotmentRoutes = require("./routes/hostelallotmentRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 ////////middleware declarations
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "5mb" })); // parse form data
@@ -43,6 +44,7 @@ app.use("/api", chiefauthRoutes);
 app.use("/api", hostelallotmentRoutes);
 app.use("/api", menuRoutes);
 app.use("/api", complaintRoutes);
+app.use("/api", commentRoutes);
 
 // error middleware
 app.use(errorHandler);

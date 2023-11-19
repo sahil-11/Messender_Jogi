@@ -2,12 +2,14 @@ const User = require("../models/userModel");
 const ErrorResponse = require("../utils/errorResponse");
 const Hostel = require("../models/hostel");
 const Complaint = require("../models/complaintModel");
+const Comment = require("../models/comment");
 
 exports.raiseComplaint = async (req, res, next) => {
   const Issue = req.body.issue;
-  const UserId = req.body.userId;
+  const UserId = req.user._id;
   const UserName = req.body.userName;
   const HostelName = req.body.hostelName;
+  console.log(req);
   // console.log(req.query);
   try {
     const complaint = await Complaint.create({
@@ -115,6 +117,38 @@ exports.showUserComplaints = async (req, res, next) => {
 
     console.log(complaintData);
     res.status(200).json({ complaints: complaintData });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteComplaint = async (req, res, next) => {
+  const complaintId = req.params.complaintId;
+  const complaint = await Complaint.findById(complaintId).exec();
+
+  if (!complaint)
+    next(new ErrorResponse("Comment to be deleted not found", 400));
+
+  const hostelName = complaint.hostelName;
+  if (String(req.user._id) !== String(complaint.userId))
+    next(
+      new ErrorResponse("User not authorized to delete this complaint", 400)
+    );
+
+  try {
+    await Hostel.findOneAndUpdate(
+      { Name: complaint.hostelName },
+      {
+        $pull: { complaints: complaintId },
+      }
+    );
+    await User.findByIdAndUpdate(req.user._id, {
+      $pull: { complaint: complaintId },
+    });
+
+    await Complaint.findByIdAndDelete(complaintId);
+    await Comment.deleteMany({ _id: { $in: complaint.comments } });
+    res.status(200).json({ success: true, message: "Deletion successfull" });
   } catch (error) {
     next(error);
   }

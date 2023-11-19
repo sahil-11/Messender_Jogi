@@ -4,6 +4,7 @@ const {
   raiseComplaint,
   showComplaints,
   showUserComplaints,
+  deleteComplaint,
 } = require("../controllers/complaintController");
 const { isAuthenticated } = require("../middleware/auth");
 
@@ -31,5 +32,11 @@ router.get("/showComplaints/:hostelName", showComplaints); //(returns list of co
 
 router.get("/showUserComplaints/:userId", showUserComplaints); //(returns list of complaints based on the following queries:
 //   userId(student), status(resolved/unresolved), pageIndex, pageSize)
+
+router.delete(
+  "/delete/complaint/:complaintId",
+  isAuthenticated,
+  deleteComplaint
+);
 
 module.exports = router;

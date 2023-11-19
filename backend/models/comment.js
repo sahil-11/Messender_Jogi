@@ -11,6 +11,16 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: ObjectId,
+      ref: "User",
+      required: true,
+    },
+    complaint: {
+      type: ObjectId,
+      ref: "Complaint",
+      required: true,
+    },
   },
   { timestamps: true }
 );
