@@ -1,32 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Posts from "../Posts/Posts";
-import Navbar from '../../pages/Navbar1'
+import { useQuery } from "@tanstack/react-query";
+
 import styles from './Stories.scss'
-import {useQuery} from '@tanstack/react-query'
 import { makeRequest } from "../../axios";
-export default function Stories()
+import LandingPage from "../../pages/Navbar1";
+export default function Stories(props)
 {
-    const { isLoading, error, data } = useQuery(["posts"], () =>
-    makeRequest.get("/api/showComplaints").then((res) => {
-      return res.data;
-    })
-  );
+  const [data,setData]=useState('');
+  const [array,setArrya]=useState('');
+    const stories =[
+        {
+            id:1,
+            image:"https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
+           issue:"Bad food",
+           upvotes:"1",
+           downvotes:"4",
+           raisedon:"18/01/2093",
+           status:false,
+           user:"archit bajpai",
+           userName:"20214229",
+           comments:"None",
+           hostel:"Tandon"
+        },
+        {
+
+            id:2,
+            image:"https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
+           issue:"Bad food",
+           upvotes:"1",
+           downvotes:"4",
+           raisedon:"18/01/2093",
+           status:false,
+           user:"archit bajpai",
+           userName:"20214229",
+           comments:"None",
+           hostel:"Tandon"
+        },
+    ];
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch("http://localhost:9000/api/showComplaints/?hostelName=Malviya").then(response => response.json())
+        .then(data => {
+
+          setData(data);
+          setArrya(data.complaints) // Set the fetched data into state
+        })
+        
+      };
+      fetchData();
+    }, [props.id]);
+     if(data)
+     {
+      console.log(array);
+     }
     return (
-        <>        <Navbar />
+      <div>
+      <LandingPage />
         <div className="outer">
         <div className="useless"></div>
     <div className="Stories">
-
-      {
-        error ? "Something Went Wrong!" :isLoading ?"Loading" :
-        data.map(story => (
-       <Posts post={story} key={story.id} />
-      ))
-      }
+      {array.map(story => (
+       <Posts post={story} key={story._id} />
+      ))}
     </div>
     <div className="useless"></div>
     </div>
-    </>
-)
+    </div>)
 }

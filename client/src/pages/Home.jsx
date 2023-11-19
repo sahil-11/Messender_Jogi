@@ -8,6 +8,7 @@ export default function Home()
       <div id="outer">  
          <div id="inner">
          <Stories />
+        
          </div>
 </div>
     )

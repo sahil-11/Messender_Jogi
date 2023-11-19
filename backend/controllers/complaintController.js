@@ -56,7 +56,6 @@ exports.showComplaints = async (req, res, next) => {
         "user",
       ])
       .exec();
-
     const statusFilter = req.query.status;
     let complaints;
     if (statusFilter === undefined) complaints = hostel.complaints;
