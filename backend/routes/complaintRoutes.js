@@ -26,10 +26,10 @@ router.post("/upload", upload.single("file"), (req, res) => {
   res.status(201).json(file.filename);
 });
 
-router.get("/showComplaints", showComplaints); //(returns list of complaints based on the following queries:
+router.get("/showComplaints/:hostelName", showComplaints); //(returns list of complaints based on the following queries:
 //   hostelName, status(resolved/unresolved), pageIndex, pageSize)
 
-router.get("/showUserComplaints", showUserComplaints); //(returns list of complaints based on the following queries:
+router.get("/showUserComplaints/:userId", showUserComplaints); //(returns list of complaints based on the following queries:
 //   userId(student), status(resolved/unresolved), pageIndex, pageSize)
 
 module.exports = router;

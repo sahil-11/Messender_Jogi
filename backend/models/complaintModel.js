@@ -5,6 +5,7 @@ const complaintSchema = new mongoose.Schema(
   {
     issue: {
       type: String,
+      required: true,
     },
     upvotes: {
       type: Map,

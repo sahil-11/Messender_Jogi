@@ -37,10 +37,8 @@ exports.raiseComplaint = async (req, res, next) => {
   }
 };
 
-exports.showComplaints = async (req, res, next) => 
-{
-   console.log(res.body);
-  const hostelName = req.query.hostelName;
+exports.showComplaints = async (req, res, next) => {
+  const hostelName = req.params.hostelName;
   try {
     const hostel = await Hostel.findOne({
       Name: hostelName,
@@ -82,7 +80,7 @@ exports.showComplaints = async (req, res, next) =>
 };
 
 exports.showUserComplaints = async (req, res, next) => {
-  const userId = req.query.userId;
+  const userId = req.params.userId;
 
   try {
     const user = await User.findById(userId)
