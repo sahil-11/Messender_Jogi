@@ -37,7 +37,9 @@ exports.raiseComplaint = async (req, res, next) => {
   }
 };
 
-exports.showComplaints = async (req, res, next) => {
+exports.showComplaints = async (req, res, next) => 
+{
+   console.log(res.body);
   const hostelName = req.query.hostelName;
   try {
     const hostel = await Hostel.findOne({
@@ -54,7 +56,6 @@ exports.showComplaints = async (req, res, next) => {
         "user",
       ])
       .exec();
-
     const statusFilter = req.query.status;
     let complaints;
     if (statusFilter === undefined) complaints = hostel.complaints;

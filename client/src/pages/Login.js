@@ -1,17 +1,54 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ReactDOM } from "react";
+import axios from "axios";
 import styles from '../styles/Landingpage.css'
 import { useState } from "react";
 import LandingPage from "./Navbar1";
+import { Navigate,Link } from "react-router-dom";
+import { AuthContext } from "./authContext";
+import { useNavigate } from "react-router-dom";
 export default function Login()
 {
-  const [Email,setEmail]=useState('');
-  const [Password,setPassword]=useState('');
-  const handlesSubmit= (e) =>
+  const {currentUser,login}=useContext(AuthContext);
+  const [email,setEmail]=useState('');
+  const [password,setPassword]=useState('');
+  const [chiefemail,setemail]=useState('');
+  const [chiefpassword,setpassword]=useState('');
+
+  const inputs2={chiefemail,chiefpassword};
+  const navigate =useNavigate();
+  const handlesSubmit= async (e) =>
   {
-e.preventDefault();
-console.log(Email);
+   e.preventDefault();
+   try
+   {
+    //  await login(inputs1);
+    await axios.post("http://localhost:9000/api/signin",{
+      email,password,
+    });
+    navigate("/");
+   }
+  catch (error) 
+  {
+    console.log(error.response.data);
+   }
   };
+  const chiefsubmit = async (e) =>
+  {
+    e.preventDefault();
+    try
+    {
+     //  await login(inputs1);
+     await axios.post("http://localhost:9000/api/chief/signin",{
+       email,password,
+     });
+     navigate("/");
+    }
+   catch (error) 
+   {
+     console.log(error.response.data);
+    }
+  }
     return (
       <>
       <LandingPage />
@@ -20,15 +57,15 @@ console.log(Email);
       <div className="former">
     <h3>Student</h3>
     <br />
-          <form method= "/post" action="/signin" onSubmit={handlesSubmit}>
+          <form  onSubmit={handlesSubmit}>
   <div className="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input value={Email} onChange={(e)=>setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+    <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div className="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input value={Password} onChange={(e)=>setPassword(e.target.value)} 
+    <input value={password} onChange={(e)=>setPassword(e.target.value)} 
     type="password" 
     className="form-control" 
     id="exampleInputPassword1" 
@@ -39,21 +76,21 @@ console.log(Email);
   </div>
   <div className="form-check">
     </div>
-    <button  type="submit" className="btn btn-primary">Submit</button>
+    <button  type="submit" className="btn btn-primary" onClick={handlesSubmit}>Submit</button>
   </form>
   </div>
   <div className="former">
   <h3>Management</h3>
   <br></br>
-  <form onSubmit={handlesSubmit} action="/chief/signin">
+  <form onSubmit={chiefsubmit} >
   <div className="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input value={Email} onChange={(e)=>setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+    <input value={chiefemail} onChange={(e)=>setemail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div className="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input value={Password} onChange={(e)=>setPassword(e.target.value)} 
+    <input value={chiefpassword} onChange={(e)=>setpassword(e.target.value)} 
     type="password" 
     className="form-control" 
     id="exampleInputPassword1" 
@@ -64,7 +101,7 @@ console.log(Email);
   </div>
   <div className="form-check">
     </div>
-    <button  type="submit" className="btn btn-primary">Submit</button>
+    <button   className="btn btn-primary">Submit</button>
   </form>
   </div>
       </div>

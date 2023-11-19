@@ -6,7 +6,7 @@ export default function LandingPage()
 {
     return (
         <header>
-            <img className="logo" src="./images/brandlog.jpeg" alt="logo" href="/Home"></img>
+            <img className="logo" src="./images/brandlog.jpeg" alt="logo" href="/"></img>
             <nav>
                 <ul className="nav_links">
                     <li><a href="/signup">Signin</a></li>
