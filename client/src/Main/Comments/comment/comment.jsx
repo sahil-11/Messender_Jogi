@@ -4,10 +4,10 @@ export default function Comment({comment})
     return  (
         <>
         <div className="comment">
-          <img src={comment.profilePicture} alt="" />
-            <span className='name'>{comment.name}</span>
+          <img src="" alt="" />
+            <span className='name'>{comment.userName}</span>
           <div className="info">
-            <p>{comment.desc}</p>
+            <p>{comment.comment}</p>
           </div>
           <div className="date">
           <span >1 hour ago</span>

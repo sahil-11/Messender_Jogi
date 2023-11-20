@@ -15,24 +15,27 @@ export default function Login()
   const [chiefemail,setemail]=useState('');
   const [chiefpassword,setpassword]=useState('');
 
+  const[inputs, setInputs] = useState({
+    email:"",
+    password:"",
+  })
+
+  const handleChange = (e) =>{
+    setInputs((prev)=>({...prev, [e.target.name]: e.target.value}))
+  };
+
   const inputs2={chiefemail,chiefpassword};
   const navigate =useNavigate();
-  const handlesSubmit= async (e) =>
-  {
-   e.preventDefault();
-   try
-   {
-    //  await login(inputs1);
-    await axios.post("http://localhost:9000/api/signin",{
-      email,password,
-    });
-    navigate("/");
-   }
-  catch (error) 
-  {
-    console.log(error.response.data);
-   }
-  };
+  const handleLogin = async (e) =>{
+    e.preventDefault();
+    try{
+        await login(inputs);
+        navigate("/Malviya");
+    }catch(err){
+        console.log(err);
+    }
+    
+}
   const chiefsubmit = async (e) =>
   {
     e.preventDefault();
@@ -57,15 +60,15 @@ export default function Login()
       <div className="former">
     <h3>Student</h3>
     <br />
-          <form  onSubmit={handlesSubmit}>
+          <form  onSubmit={handleLogin}>
   <div className="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+    <input name="email" onChange={handleChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div className="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input value={password} onChange={(e)=>setPassword(e.target.value)} 
+    <input name="password" onChange={handleChange} 
     type="password" 
     className="form-control" 
     id="exampleInputPassword1" 
@@ -76,7 +79,7 @@ export default function Login()
   </div>
   <div className="form-check">
     </div>
-    <button  type="submit" className="btn btn-primary" onClick={handlesSubmit}>Submit</button>
+    <button  type="submit" className="btn btn-primary" onClick={handleLogin}>Submit</button>
   </form>
   </div>
   <div className="former">

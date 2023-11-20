@@ -6,25 +6,34 @@ import Comment from './comment/comment'
 export default function Components({props}) 
 {
      const [comment,setComment]=useState('');
-    
+     const [cummints, setCummints] = useState([]);
+
     const comint=props.comments;
-    useEffect(() => {
+    console.log(comint);
+   
       const fetchData = async () => {
-        const response = await fetch("http://localhost:9000/api/comment/655a3453df07c93104f2d98b").then(response => response.json())
-        .then(data => {
-          console.log(data);
-        })
+        try{
+            const response = await axios.get("http://localhost:9000/api/comment/655a3453df07c93104f2d98b", {
+            withCredentials: true
+          })
+            console.log(response);
+        }catch(err){
+            console.log(err);
+        }
+        
+          
+        
         
       };
       fetchData();
-    }, [props.id]);
+   
     const handlesSubmit= async (e) =>
     {
      e.preventDefault();
      const port=comint._id;
      try
      {
-     axios.post("http://localhost:9000/api/comment/"+{port},{
+     axios.post("http://localhost:9000/api/comment/"+port,{
       comment
      })
      }
@@ -59,7 +68,7 @@ export default function Components({props})
         console.log(comment)}}/>
         <button onSubmit={handlesSubmit}>Post</button>
      </div>
-        {comint.map(comment =>(
+        {cummints.map(comment =>(
             <Comment comment={comment} key={comment._id}/>
         ))}
       </div>

@@ -10,7 +10,10 @@ import { Children, useContext } from 'react';
 function App() 
 {
    
-   const isloggedin =1;
+   const {currentUser} = useContext(AuthContext);
+
+   const isloggedin = currentUser !== null;
+   console.log(isloggedin);
   const Protectedroutes =({children})=>{
    if(!isloggedin)
    {
@@ -19,10 +22,28 @@ function App()
    return children
   }
   return (
-   <AuthContextProvider >
+   
      <BrowserRouter >
       <Routes>
+         <Route exact path='/Malviya' 
+         element={
+         <Protectedroutes>
+            <Home />
+         </Protectedroutes>}
+         ></Route>
          <Route exact path='/' 
+         element={
+         <Protectedroutes>
+            <Home />
+         </Protectedroutes>}
+         ></Route>
+         <Route exact path='/Tandon' 
+         element={
+         <Protectedroutes>
+            <Home />
+         </Protectedroutes>}
+         ></Route>
+         <Route exact path='/Tilak' 
          element={
          <Protectedroutes>
             <Home />
@@ -30,15 +51,15 @@ function App()
          ></Route>
       </Routes>
       <Routes>
-          <Route path="/signup" element={<Signin />}></Route>
+          <Route path="/signin" element={<Signin />}></Route>
       </Routes>
    
       <Routes>
-         <Route path="/Signin" element={<Signup />}>
+         <Route path="/signup" element={<Signup />}>
          </Route>
       </Routes>
      </BrowserRouter>
-     </AuthContextProvider>
+     
   );
 }
 export default App;

@@ -6,8 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import styles from './Stories.scss'
 import { makeRequest } from "../../axios";
 import LandingPage from "../../pages/Navbar1";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 export default function Stories(props)
 {
+
+  const location = useLocation();
+  const id = location.pathname.split("/")[1];
+  console.log(id);
   const [data,setData]=useState('');
   const [arr,setArrya]=useState([]);
     const stories =[
@@ -39,17 +45,26 @@ export default function Stories(props)
            hostel:"Tandon"
         },
     ];
-    useEffect(() => {
+    
+    useEffect(()=> {
       const fetchData = async () => {
-        const response = await fetch("http://localhost:9000/api/showComplaints/Malviya").then(response => response.json())
-        .then(data => {
-          setData(data);
-          setArrya(data.complaints) // Set the fetched data into state
+        try{
+          const response = await axios.get("http://localhost:9000/api/showComplaints/" + id, {
+          withCredentials: true
         })
+          
+          setArrya(response.data.complaints) // Set the fetched data into state
+          console.log(arr);
+        }catch(err){
+          console.log(err);
+        }
+        
+       
         
       };
       fetchData();
-    }, [props.id]);
+    }, []);
+  
     return (
       <div>
       <LandingPage />
