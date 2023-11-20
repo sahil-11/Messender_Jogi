@@ -21,11 +21,7 @@ export default function Components({props})
             setCummints(response.data.comments);
         }catch(err){
             console.log(err);
-        }
-        
-          
-        
-        
+        }   
       };
       fetchData();
     }, []);

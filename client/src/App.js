@@ -12,7 +12,7 @@ function App()
    
    const {currentUser} = useContext(AuthContext);
 
-   const isloggedin = currentUser !== null;
+   const isloggedin = 1+(currentUser !== null);
    console.log(isloggedin);
   const Protectedroutes =({children})=>{
    if(!isloggedin)
@@ -53,7 +53,7 @@ function App()
       <Routes>
           <Route path="/signin" element={<Signin />}></Route>
       </Routes>
-   
+
       <Routes>
          <Route path="/signup" element={<Signup />}>
          </Route>

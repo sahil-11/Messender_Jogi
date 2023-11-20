@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-router.post("/hostel/raisecomplaint", isAuthenticated, raiseComplaint);
+router.post("/hostel/raisecomplaint", raiseComplaint);
 
 // use // /api/upload for uploading pictures while raisingComplaint
 router.post("/upload", upload.single("file"), (req, res) => {

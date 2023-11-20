@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Posts from "../Posts/Posts";
 import { useQuery } from "@tanstack/react-query";
-
+import Share from "../Addposts/Addposts";
 import styles from './Stories.scss'
 import { makeRequest } from "../../axios";
 import LandingPage from "../../pages/Navbar1";
 import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 export default function Stories(props)
 {
-
   const location = useLocation();
   const id = location.pathname.split("/")[1];
   console.log(id);
@@ -48,25 +48,22 @@ export default function Stories(props)
     useEffect(()=> {
       const fetchData = async () => {
         try{
-          const response = await axios.get("http://localhost:9000/api/showComplaints/" + id, {
+          const response = await axios.get("http://localhost:9000/api/showComplaints/Malviya"  /*+ id*/, {
           withCredentials: true
         })
-          
+   
           setArrya(response.data.complaints) // Set the fetched data into state
           console.log(arr);
         }catch(err){
           console.log(err);
         }
-        
-       
-        
       };
       fetchData();
     }, []);
   
     return (
       <div>
-      <LandingPage />
+         <Share />
         <div className="outer">
         <div className="useless"></div>
     <div className="Stories">
