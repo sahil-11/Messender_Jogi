@@ -1,10 +1,38 @@
-import React, { Component, useContext } from 'react'
+import React, { Component, useContext, useEffect, useState } from 'react'
+import axios from 'axios';
 import styles from './Comments.scss'
 import Comment from './comment/comment'
 
-export default function Components() 
+export default function Components({props}) 
 {
+     const [comment,setComment]=useState('');
     
+    const comint=props.comments;
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch("http://localhost:9000/api/comment/655a3453df07c93104f2d98b").then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        
+      };
+      fetchData();
+    }, [props.id]);
+    const handlesSubmit= async (e) =>
+    {
+     e.preventDefault();
+     const port=comint._id;
+     try
+     {
+     axios.post("http://localhost:9000/api/comment/"+{port},{
+      comment
+     })
+     }
+     catch(error)
+     {
+      console.log(error.response.data);
+     }
+    };
     const comments = [
         {
           id: 1,
@@ -27,11 +55,12 @@ export default function Components()
       <div className='Comments'>
      <div className='writecomment'>
         <img src='logo512.png' alt="" />
-        <input type="text" placeholder='Write a comment'/>
-        <button>Post</button>
+        <input type="text" placeholder='Write a comment' value={comment} onChange={(e)=> {setComment(e.target.value)
+        console.log(comment)}}/>
+        <button onSubmit={handlesSubmit}>Post</button>
      </div>
-        {comments.map(comment =>(
-            <Comment comment={comment} />
+        {comint.map(comment =>(
+            <Comment comment={comment} key={comment._id}/>
         ))}
       </div>
     )

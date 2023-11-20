@@ -9,7 +9,7 @@ import LandingPage from "../../pages/Navbar1";
 export default function Stories(props)
 {
   const [data,setData]=useState('');
-  const [array,setArrya]=useState('');
+  const [arr,setArrya]=useState([]);
     const stories =[
         {
             id:1,
@@ -41,9 +41,8 @@ export default function Stories(props)
     ];
     useEffect(() => {
       const fetchData = async () => {
-        const response = await fetch("http://localhost:9000/api/showComplaints/?hostelName=Malviya").then(response => response.json())
+        const response = await fetch("http://localhost:9000/api/showComplaints/Malviya").then(response => response.json())
         .then(data => {
-
           setData(data);
           setArrya(data.complaints) // Set the fetched data into state
         })
@@ -51,17 +50,13 @@ export default function Stories(props)
       };
       fetchData();
     }, [props.id]);
-     if(data)
-     {
-      console.log(array);
-     }
     return (
       <div>
       <LandingPage />
         <div className="outer">
         <div className="useless"></div>
     <div className="Stories">
-      {array.map(story => (
+      {arr.map(story => (
        <Posts post={story} key={story._id} />
       ))}
     </div>
