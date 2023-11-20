@@ -3,7 +3,27 @@
     margin: 30px 0px;
    justify-content: space-between;
    max-width: fit-content;
+    
+    .user-info{
+        display: flex;
+        
 
+        .logo{
+            background-color: aqua;
+            opacity: 0.75;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+            font-weight: bold;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    
     .info
     {
         gap: 3px;

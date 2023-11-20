@@ -10,13 +10,15 @@ export default function Components({props})
 
     const comint=props.comments;
     console.log(comint);
-   
+
+    useEffect(()=> {
       const fetchData = async () => {
         try{
             const response = await axios.get("http://localhost:9000/api/comment/655a3453df07c93104f2d98b", {
             withCredentials: true
           })
             console.log(response);
+            setCummints(response.data.comments);
         }catch(err){
             console.log(err);
         }
@@ -26,6 +28,7 @@ export default function Components({props})
         
       };
       fetchData();
+    }, []);
    
     const handlesSubmit= async (e) =>
     {

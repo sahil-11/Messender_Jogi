@@ -14,7 +14,6 @@ export default function Stories(props)
   const location = useLocation();
   const id = location.pathname.split("/")[1];
   console.log(id);
-  const [data,setData]=useState('');
   const [arr,setArrya]=useState([]);
     const stories =[
         {

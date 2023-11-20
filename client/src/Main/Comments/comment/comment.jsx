@@ -4,8 +4,11 @@ export default function Comment({comment})
     return  (
         <>
         <div className="comment">
-          <img src="" alt="" />
+        <div className='user-info'>
+            <div className='logo'><span>{comment.userName[0]}</span></div>
             <span className='name'>{comment.userName}</span>
+        </div>
+          
           <div className="info">
             <p>{comment.comment}</p>
           </div>
