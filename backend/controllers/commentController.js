@@ -4,9 +4,9 @@ const Comment = require("../models/comment");
 
 exports.addcomment = async (req, res, next) => {
   const comment = req.body.comment;
-  const userID = req.user._id;
+  const userID = req.body._id;
   const complaintID = req.params.complaintID;
-  const userName = req.user.firstName + " " + req.user.lastName;
+  const userName = req.body.firstName + " " + req.body.lastName;
   try {
     const new_comment = await Comment.create({
       comment: comment,

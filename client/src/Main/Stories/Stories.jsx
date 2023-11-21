@@ -48,7 +48,7 @@ export default function Stories(props)
     useEffect(()=> {
       const fetchData = async () => {
         try{
-          const response = await axios.get("http://localhost:9000/api/showComplaints/Malviya"  /*+ id*/, {
+          const response = await axios.get("http://localhost:9000/api/showComplaints/Malviya"  + id, {
           withCredentials: true
         })
    

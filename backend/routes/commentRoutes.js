@@ -7,8 +7,8 @@ const {
 } = require("../controllers/commentController");
 const { isAuthenticated } = require("../middleware/auth");
 
-router.post("/comment/:complaintID", isAuthenticated, addcomment);
-router.get("/comment/:complaintID", isAuthenticated, showcomment);
+router.post("/comment/:complaintID",  addcomment);
+router.get("/comment/:complaintID",  showcomment);
 router.delete("/delete/comment/:commentID", isAuthenticated, deleteComment);
 
 module.exports = router;
