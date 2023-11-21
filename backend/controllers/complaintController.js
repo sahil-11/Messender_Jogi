@@ -58,14 +58,14 @@ exports.showComplaints = async (req, res, next) => {
       .exec();
     const statusFilter = req.query.status;
     let complaints;
+
     if (statusFilter === undefined) complaints = hostel.complaints;
     else
       complaints = hostel.complaints.filter(
         (obj) => obj.status == statusFilter
       );
 
-    //////////  pagination
-    let { pageIndex = 1, pageSize = 5 } = req.query;
+    let { pageIndex = 1, pageSize = 5000 } = req.query;
     let count = complaints.length;
     let firstIndex = pageSize * (pageIndex - 1);
     let lastIndex = pageSize * pageIndex;
@@ -74,7 +74,6 @@ exports.showComplaints = async (req, res, next) => {
 
     const complaintData = complaints.slice(firstIndex, lastIndex);
 
-    console.log(complaintData);
     res.status(200).json({ complaints: complaintData });
   } catch (error) {
     next(error);
@@ -148,6 +147,16 @@ exports.deleteComplaint = async (req, res, next) => {
     await Complaint.findByIdAndDelete(complaintId);
     await Comment.deleteMany({ _id: { $in: complaint.comments } });
     res.status(200).json({ success: true, message: "Deletion successfull" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.resolveComplaint = async (req, res, next) => {
+  const complaintID = req.params.complaintID;
+  try {
+    await Complaint.findByIdAndUpdate(complaintID, { status: true }).exec();
+    res.status(201).json({ success: true, message: "Complaint resolved" });
   } catch (error) {
     next(error);
   }

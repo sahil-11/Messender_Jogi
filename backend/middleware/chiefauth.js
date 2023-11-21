@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const Chief = require("../models/chiefWarden");
 
 // check is user is authenticated
-exports.isAuthenticated = async (req, res, next) => {
+exports.isChief = async (req, res, next) => {
   const { token } = req.cookies; // use this for postman
   // const { token } = req.headers;
   // Make sure token exists

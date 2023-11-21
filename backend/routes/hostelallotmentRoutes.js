@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { hostelallotment } = require("../controllers/hostelallotmentController");
-const { isAuthenticated } = require("../middleware/chiefauth");
+const { isChief } = require("../middleware/chiefauth");
 
 //auth routes
-router.post("/hostelallotment", isAuthenticated, hostelallotment);
+router.post("/hostelallotment", isChief, hostelallotment);
 
 module.exports = router;
-

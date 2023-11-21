@@ -39,7 +39,7 @@ exports.addMenu = async (req, res, next) => {
 };
 
 exports.showMenu = async (req, res, next) => {
-  const hostelName = req.body.Hostel;
+  const hostelName = req.params.Hostel;
   const queryDay = req.body.day;
   console.log(hostelName, queryDay);
   try {
@@ -71,26 +71,20 @@ exports.updateMenu = async (req, res, next) => {
 
   const hostelName = req.body.hostel;
   try {
-    const hostel = await Hostel.findOne({ Name: hostelName })
-      .populate("meals")
-      .exec();
-
-    await DailyMeal.findOneAndDelete({
+    await DailyMeal.findOneAndUpdate(
+      {
+        day: day,
+        hostelName: hostelName,
+      },
+      { ...req.body }
+    ).exec();
+    const newMeal = await DailyMeal.findOne({
       day: day,
       hostelName: hostelName,
     }).exec();
-
-    console.log("...........");
-    const meal = await DailyMeal.create({
-      ...req.body,
-      hostelName: hostelName,
-    });
-
-    hostel.meals[day] = meal;
-    await hostel.save();
     res.status(201).json({
       success: true,
-      meal: meal,
+      meal: newMeal,
       Hostel: hostelName,
       day: day,
     });

@@ -5,8 +5,10 @@ const {
   showComplaints,
   showUserComplaints,
   deleteComplaint,
+  resolveComplaint,
 } = require("../controllers/complaintController");
 const { isAuthenticated } = require("../middleware/auth");
+const { isChief } = require("../middleware/chiefauth");
 
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -38,5 +40,7 @@ router.delete(
   isAuthenticated,
   deleteComplaint
 );
+
+router.patch("/resolve/:complaintID", isChief, resolveComplaint);
 
 module.exports = router;

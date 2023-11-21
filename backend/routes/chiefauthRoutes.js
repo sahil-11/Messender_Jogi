@@ -5,7 +5,7 @@ const {
   signin,
   logout,
 } = require("../controllers/chiefauthController");
-const { isAuthenticated } = require("../middleware/chiefauth");
+const { isChief } = require("../middleware/chiefauth");
 
 //auth routes
 // /api/signup
