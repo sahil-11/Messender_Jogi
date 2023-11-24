@@ -5,10 +5,10 @@ const {
   showMenu,
   updateMenu,
 } = require("../controllers/menuController");
-const { isAuthenticated } = require("../middleware/chiefauth");
+const { isChief } = require("../middleware/chiefauth");
 
-router.post("/addmenu", isAuthenticated, addMenu);
+router.post("/addmenu", isChief, addMenu);
 router.get("/showmenu/:Hostel", showMenu);
-router.patch("/updatemenu", isAuthenticated, updateMenu);
+router.patch("/updatemenu", isChief, updateMenu);
 
 module.exports = router;
