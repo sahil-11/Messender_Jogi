@@ -1,8 +1,10 @@
 import "./messmenu.scss"
 import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from 'styled-components'
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 const Wrapper = styled.div`
@@ -50,20 +52,60 @@ const MealTitle  =styled.h1`
   color: white;
 `
 
-const MealDesc = styled.p`
+const MealDesc = styled.ul`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+const MealItem = styled.li`
   color: white;
 `
 
 
-const MessMenu = ({messMenuOpen, setMessMenuOpen}) => {
+const MessMenu = ({messMenuOpen, setMessMenuOpen, chief}) => {
+  console.log("messmenu");
+  const location = useLocation();
+  const id = !chief?location.pathname.split("/")[1]:location.pathname.split("/")[2];
+  console.log(id);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [breakfast, setBreakfast] = useState([]);
+  const [lunch, setLunch] = useState([]);
+  const [eveningSnacks, setEveningSnacks] = useState([]);
+  const [dinner, setDinner] = useState([]);
+
+  useEffect(()=> {
+    console.log("Effect triggered");
+    const fetchData = async () => {
+      try{
+        const response = await axios.get("http://localhost:9000/api/showmenu/" + id + "?" + "day=" + slideIndex, {
+        withCredentials: true
+      })
+        console.log(response);
+        setBreakfast(response.data.meal.breakfast);
+        setLunch(response.data.meal.lunch);
+        setEveningSnacks(response.data.meal.eveningSnacks);
+        setDinner(response.data.meal.dinner); // Set the fetched data into state
+        // console.log(breakfast);
+      }catch(err){
+        console.log(err);
+      }
+      
+     
+      
+    };
+    fetchData();
+  }, [id, slideIndex]);
+
+    console.log(breakfast);
     const handleClick = (direction)=>{
         console.log(slideIndex);
         if(direction === "left"){
             
-            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
+            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 6)
         }else{
-            setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)
+            setSlideIndex(slideIndex < 6 ? slideIndex + 1 : 0)
         }
     };
 
@@ -80,7 +122,24 @@ const MessMenu = ({messMenuOpen, setMessMenuOpen}) => {
       {
         id: 3,
         day: "Wednesday"
+      },
+      {
+        id: 4,
+        day: "Thursday"
+      },
+      {
+        id: 5,
+        day: "Friday"
+      },
+      {
+        id: 6,
+        day: "Saturday"
+      },
+      {
+        id: 7,
+        day: "Sunday"
       }
+      
     ]
 
   return (
@@ -103,15 +162,27 @@ const MessMenu = ({messMenuOpen, setMessMenuOpen}) => {
                         <MenuContainer>
                             <MealContainer>
                                 <MealTitle>Breakfast</MealTitle>
-                                <MealDesc>Pulao</MealDesc>
+                                <MealDesc>{breakfast.map((item) => (
+                                  <MealItem>{item}</MealItem>
+                                ))}</MealDesc>
                             </MealContainer>
                             <MealContainer>
                                 <MealTitle>Lunch</MealTitle>
-                                <MealDesc>Chaap</MealDesc>
+                                <MealDesc>{lunch.map((item) => (
+                                  <MealItem>{item}</MealItem>
+                                ))}</MealDesc>
+                            </MealContainer>
+                            <MealContainer>
+                                <MealTitle>Snacks</MealTitle>
+                                <MealDesc>{eveningSnacks.map((item) => (
+                                  <MealItem>{item}</MealItem>
+                                ))}</MealDesc>
                             </MealContainer>
                             <MealContainer>
                                 <MealTitle>Dinner</MealTitle>
-                                <MealDesc>Rajma</MealDesc>
+                                <MealDesc>{dinner.map((item) => (
+                                  <MealItem>{item}</MealItem>
+                                ))}</MealDesc>
                             </MealContainer>
                         </MenuContainer>
                     </InfoContainer>

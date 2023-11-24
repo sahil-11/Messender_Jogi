@@ -11,18 +11,18 @@ export default function Menu({menuOpen, setMenuOpen, messMenuOpen, setMessMenuOp
 
   return (
     <div className={'menu ' + (menuOpen && 'active')}>
-        <ul>
+        <ul className="menu-items">
             <li onClick={()=>setHostels(!hostels)}>
                 <a href="#intro">Hostels</a>
                 {hostels && <ul>
                     <li onClick={()=>setMenuOpen(false)}>
-                        <a href="#intro">Tandon</a>
+                        <a href="/Tandon">Tandon</a>
                     </li>
                     <li onClick={()=>setMenuOpen(false)}>
-                        <a href="#portfolio">Malviya</a>
+                        <a href="/Malviya">Malviya</a>
                     </li>
                     <li onClick={()=>setMenuOpen(false)}>
-                        <a href="#portfolio">Tilak</a>
+                        <a href="/Tilak">Tilak</a>
                     </li>
                 
                 </ul>}

@@ -1,0 +1,15 @@
+.Stories
+{
+    margin: 0px 0px;
+     width: 70vw;
+}
+.outer
+{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 2fr 1fr ;
+    justify-content: center;
+}

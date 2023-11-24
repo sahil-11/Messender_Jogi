@@ -1,24 +1,25 @@
 import { useState } from "react"
 import "./dropdown.scss"
 
-const Dropdown = ({selected, setSelected}) => {
+const Dropdown = ({selected, setSelected, options}) => {
 
     const [active, setActive] = useState(false);
-
-    const options = ["a", "b", "c"];
+    const [display, setDisplay] = useState("Select");
+    
 
   return (
     <div className="dropdown">
-        <div className="dropdown-btn" onClick={()=>setActive(!active)}>Select</div>
+        <div className="dropdown-btn" onClick={()=>setActive(!active)}>{display}</div>
         {active && (<div className="dropdown-content">
                         {options.map((option) => (
                             <div className="dropdown-item" onClick={(e) => 
                                 {
-                                    setSelected(option);
+                                    setSelected(option.value);
                                     setActive(false);
+                                    setDisplay(option.placeholder);
                                 }
                             }>
-                                {option}
+                                {option.placeholder}
                             </div>
                         ))}
                         

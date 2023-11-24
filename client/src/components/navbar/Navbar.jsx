@@ -1,12 +1,20 @@
 import "./navbar.scss"
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { AuthContext } from "../../pages/authContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
+const Navbar = ({setChief, menuOpen, setMenuOpen}) => {
+    const {currentUser}=useContext(AuthContext);
 
-const Navbar = ({menuOpen, setMenuOpen}) => {
+    const navigate = useNavigate();
   return (
     <div className={"navbar " + (menuOpen && 'active')}>
         <div className="left">
-            <div className='hamburger' onClick={()=>setMenuOpen(!menuOpen)}>
+            <div className='hamburger' onClick={(e)=>{
+                e.preventDefault();
+                setMenuOpen(!menuOpen)
+            }}>
                 <span className='line1'></span>
                 <span className='line2'></span>
                 <span className='line3'></span>
@@ -18,7 +26,11 @@ const Navbar = ({menuOpen, setMenuOpen}) => {
         <div className="right">
             <div className="user">
                 <AccountCircleOutlinedIcon/>
-                <span>Name</span>
+                {currentUser && <span onClick={() => {
+                    localStorage.removeItem("user");
+                    navigate("/signin");
+                    setChief(false);
+                }}>Log Out</span>}
             </div>
         </div>
     </div>
