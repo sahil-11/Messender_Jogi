@@ -6,10 +6,10 @@ const Comment = require("../models/comment");
 
 exports.raiseComplaint = async (req, res, next) => {
   const Issue = req.body.issue;
-  const UserId = req.user._id;
+  const UserId = req.body._id;
   const UserName = req.body.userName;
   const HostelName = req.body.hostelName;
-  console.log(req);
+  console.log(req.body);
   // console.log(req.query);
   try {
     const complaint = await Complaint.create({
@@ -18,7 +18,7 @@ exports.raiseComplaint = async (req, res, next) => {
       userName: UserName,
       hostelName: HostelName,
     });
-
+    console.log(complaint);
     await Hostel.findOneAndUpdate(
       { Name: HostelName },
       {
@@ -65,16 +65,18 @@ exports.showComplaints = async (req, res, next) => {
         (obj) => obj.status == statusFilter
       );
 
-    let { pageIndex = 1, pageSize = 5000 } = req.query;
-    let count = complaints.length;
-    let firstIndex = pageSize * (pageIndex - 1);
-    let lastIndex = pageSize * pageIndex;
-    lastIndex = Math.min(count, lastIndex);
-    if (lastIndex < firstIndex) firstIndex = 0;
+    //////////  pagination
+    // let { pageIndex = 1, pageSize = 500 } = req.query;
+    // let count = complaints.length;
+    // let firstIndex = pageSize * (pageIndex - 1);
+    // let lastIndex = pageSize * pageIndex;
+    // lastIndex = Math.min(count, lastIndex);
+    // if (lastIndex < firstIndex) firstIndex = 0;
 
-    const complaintData = complaints.slice(firstIndex, lastIndex);
+    // const complaintData = complaints.slice(firstIndex, lastIndex);
 
-    res.status(200).json({ complaints: complaintData });
+    // console.log(complaintData);
+    res.status(200).json({ complaints: complaints });
   } catch (error) {
     next(error);
   }
@@ -104,7 +106,7 @@ exports.showUserComplaints = async (req, res, next) => {
       complaints = user.complaint.filter((obj) => obj.status == statusFilter);
 
     //////////  pagination
-    let { pageIndex = 1, pageSize = 5 } = req.query;
+    let { pageIndex = 1, pageSize = 5000 } = req.query;
     let count = complaints.length;
     let firstIndex = pageSize * (pageIndex - 1);
     let lastIndex = pageSize * pageIndex;

@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Posts from "../Posts/Posts";
 import { useQuery } from "@tanstack/react-query";
-
+import Share from "../Addposts/Addposts";
 import styles from './Stories.scss'
 import { makeRequest } from "../../axios";
 import LandingPage from "../../pages/Navbar1";
+import { useLocation } from "react-router-dom";
+
+import axios from "axios";
 export default function Stories(props)
 {
-  const [data,setData]=useState('');
-  const [array,setArrya]=useState('');
+  const location = useLocation();
+  const id = location.pathname.split("/")[1];
+  console.log(id);
+  const [arr,setArrya]=useState([]);
     const stories =[
         {
             id:1,
@@ -39,29 +44,30 @@ export default function Stories(props)
            hostel:"Tandon"
         },
     ];
-    useEffect(() => {
+    
+    useEffect(()=> {
       const fetchData = async () => {
-        const response = await fetch("http://localhost:9000/api/showComplaints/?hostelName=Malviya").then(response => response.json())
-        .then(data => {
-
-          setData(data);
-          setArrya(data.complaints) // Set the fetched data into state
+        try{
+          const response = await axios.get("http://localhost:9000/api/showComplaints/Malviya"  + id, {
+          withCredentials: true
         })
-        
+   
+          setArrya(response.data.complaints) // Set the fetched data into state
+          console.log(arr);
+        }catch(err){
+          console.log(err);
+        }
       };
       fetchData();
-    }, [props.id]);
-     if(data)
-     {
-      console.log(array);
-     }
+    }, []);
+  
     return (
       <div>
-      <LandingPage />
+         <Share />
         <div className="outer">
         <div className="useless"></div>
     <div className="Stories">
-      {array.map(story => (
+      {arr.map(story => (
        <Posts post={story} key={story._id} />
       ))}
     </div>

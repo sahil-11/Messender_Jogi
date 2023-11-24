@@ -44,7 +44,7 @@ export default function Posts({post})
             14 comments
          </div>
         </div>
-        {cumint &&<Components />}
+        {cumint &&<Components props={post}/>}
         </div>
         </div>
     </div>;
