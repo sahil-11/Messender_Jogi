@@ -42,40 +42,17 @@ exports.raiseComplaint = async (req, res, next) => {
 exports.showComplaints = async (req, res, next) => {
   const hostelName = req.params.hostelName;
   try {
-    const hostel = await Hostel.findOne({
-      Name: hostelName,
+    let status = 0;
+    console.log(req.query.status);
+    if (req.query.status !== undefined) status = req.query.status;
+    console.log(status);
+    const complaints = await Complaint.find({
+      hostelName: hostelName,
+      status: status,
     })
-      .populate("complaints", [
-        "issue",
-        "userName",
-        "upvotes",
-        "downvotes",
-        "status",
-        "hostelName",
-        "comments",
-        "user",
-      ])
+      .sort({ createdAt: -1 })
       .exec();
-    const statusFilter = req.query.status;
-    let complaints;
 
-    if (statusFilter === undefined) complaints = hostel.complaints;
-    else
-      complaints = hostel.complaints.filter(
-        (obj) => obj.status == statusFilter
-      );
-
-    //////////  pagination
-    // let { pageIndex = 1, pageSize = 500 } = req.query;
-    // let count = complaints.length;
-    // let firstIndex = pageSize * (pageIndex - 1);
-    // let lastIndex = pageSize * pageIndex;
-    // lastIndex = Math.min(count, lastIndex);
-    // if (lastIndex < firstIndex) firstIndex = 0;
-
-    // const complaintData = complaints.slice(firstIndex, lastIndex);
-
-    // console.log(complaintData);
     res.status(200).json({ complaints: complaints });
   } catch (error) {
     next(error);
