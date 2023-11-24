@@ -3,7 +3,8 @@ import { ReactDOM } from "react";
 import axios from "axios";
 import styles from '../styles/Landingpage.css'
 import { useState } from "react";
-
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer,toast} from 'react-toastify'
 import { Navigate,Link } from "react-router-dom";
 import { AuthContext } from "./authContext";
 import { useNavigate } from "react-router-dom";
@@ -37,13 +38,15 @@ export default function Login({chief, setChief, menuOpen, setMenuOpen, messMenuO
   };
 
   const navigate =useNavigate();
-  const handleLogin = async (e) =>{
+  const handleLogin = async (e) =>
+  {
+    let x;
     e.preventDefault();
     try{
         await login(inputs);
         navigate("/Malviya");
     }catch(err){
-        console.log(err);
+       toast(err.response.data.error);
     }
     
 }
@@ -59,7 +62,7 @@ export default function Login({chief, setChief, menuOpen, setMenuOpen, messMenuO
     }
    catch (err) 
    {
-     console.log(err);
+    toast(err.response.data.error);
     }
   }
     return (
@@ -132,6 +135,7 @@ export default function Login({chief, setChief, menuOpen, setMenuOpen, messMenuO
     </div>
   </div>
         </div>
+        <ToastContainer />
      </>
     );
 }

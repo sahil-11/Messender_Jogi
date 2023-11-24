@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = ({setChief, menuOpen, setMenuOpen}) => {
     const {currentUser}=useContext(AuthContext);
-
+    const id = location.pathname.split("/")[1];
+    console.log(id);
     const navigate = useNavigate();
   return (
     <div className={"navbar " + (menuOpen && 'active')}>
@@ -31,6 +32,19 @@ const Navbar = ({setChief, menuOpen, setMenuOpen}) => {
                     navigate("/signin");
                     setChief(false);
                 }}>Log Out</span>}
+                {(id=="signin") && <span onClick={() => {
+                    localStorage.removeItem("user");
+                    navigate("/signup");
+                    
+                }}>Register</span>}
+                {(id=="signup") && <span onClick={() => {
+                    localStorage.removeItem("user");
+                    navigate("/signin");
+                    
+                }}>Login</span>}
+                
+                
+
             </div>
         </div>
     </div>
