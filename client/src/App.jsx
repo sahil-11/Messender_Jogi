@@ -95,7 +95,11 @@ function App()
          ></Route>
       </Routes>
       <Routes>
-         <Route path="/update" element={<UpdateMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>}>
+         <Route path="/update/Malviya" element={<UpdateMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>}>
+         </Route>
+         <Route path="/update/Tandon" element={<UpdateMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>}>
+         </Route>
+         <Route path="/update/Tilak" element={<UpdateMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} messMenuOpen={messMenuOpen} setMessMenuOpen={setMessMenuOpen}/>}>
          </Route>
       </Routes>
       <Routes>

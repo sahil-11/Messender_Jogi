@@ -62,6 +62,7 @@ export default function Login({chief, setChief, menuOpen, setMenuOpen, messMenuO
     }
    catch (err) 
    {
+    console.log(err);
     toast(err.response.data.error);
     }
   }

@@ -6,7 +6,8 @@ export default function Menu({menuOpen, setMenuOpen, messMenuOpen, setMessMenuOp
         setMenuOpen(false);
         setMessMenuOpen(true);
     }
-
+    const id = location.pathname.split("/")[2];
+    const isChief = location.pathname.split("/")[1] === "chief";
     const [hostels, setHostels] = useState(false);
 
   return (
@@ -30,7 +31,9 @@ export default function Menu({menuOpen, setMenuOpen, messMenuOpen, setMessMenuOp
             <li onClick={() => handleClick()}>
                 <a href="#portfolio">Menu</a>
             </li>
-           
+            <li >
+                {isChief && <a href={"/update/" + id}>Update Menu</a>}
+            </li>
         </ul>
     </div>
   )

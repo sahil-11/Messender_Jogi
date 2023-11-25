@@ -1,7 +1,7 @@
 import { useState } from "react"
 import "./dropdown.scss"
 
-const Dropdown = ({selected, setSelected, options}) => {
+const Dropdown = ({use, selected, setSelected, options, setAddedItems, setUpdatedMenu}) => {
 
     const [active, setActive] = useState(false);
     const [display, setDisplay] = useState("Select");
@@ -17,6 +17,16 @@ const Dropdown = ({selected, setSelected, options}) => {
                                     setSelected(option.value);
                                     setActive(false);
                                     setDisplay(option.placeholder);
+                                    setAddedItems([]);
+                                    if(use){
+                                        setUpdatedMenu({
+                                        breakfast: [],
+                                        lunch: [],
+                                        eveningSnacks: [],
+                                        dinner: []
+                                    });
+                                    }
+                                    
                                 }
                             }>
                                 {option.placeholder}

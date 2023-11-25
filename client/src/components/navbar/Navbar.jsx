@@ -32,12 +32,12 @@ const Navbar = ({setChief, menuOpen, setMenuOpen}) => {
                     navigate("/signin");
                     setChief(false);
                 }}>Log Out</span>}
-                {(id=="signin") && <span onClick={() => {
+                {(id==="signin") && <span onClick={() => {
                     localStorage.removeItem("user");
                     navigate("/signup");
                     
                 }}>Register</span>}
-                {(id=="signup") && <span onClick={() => {
+                {(id==="signup") && <span onClick={() => {
                     localStorage.removeItem("user");
                     navigate("/signin");
                     
